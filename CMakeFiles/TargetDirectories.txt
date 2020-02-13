@@ -1,0 +1,3 @@
+/home/monk/nn_c/CMakeFiles/rebuild_cache.dir
+/home/monk/nn_c/CMakeFiles/nn_c.dir
+/home/monk/nn_c/CMakeFiles/edit_cache.dir
