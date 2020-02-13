@@ -14,6 +14,7 @@ CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o
  /home/monk/nn_c/include/Matrix.hpp
  /home/monk/nn_c/include/NeuralNetwork.hpp
  /home/monk/nn_c/include/Neuron.hpp
+ /home/monk/nn_c/include/utils/MultiplyMatrix.hpp
  /home/monk/nn_c/src/NeuralNetwork.cpp
 CMakeFiles/nn_c.dir/src/Neuron.cpp.o
  /home/monk/nn_c/include/Neuron.hpp
@@ -23,4 +24,13 @@ CMakeFiles/nn_c.dir/src/main.cpp.o
  /home/monk/nn_c/include/Matrix.hpp
  /home/monk/nn_c/include/NeuralNetwork.hpp
  /home/monk/nn_c/include/Neuron.hpp
+ /home/monk/nn_c/include/utils/MultiplyMatrix.hpp
  /home/monk/nn_c/src/main.cpp
+CMakeFiles/nn_c.dir/src/utils/MatrixToVector.cpp.o
+ /home/monk/nn_c/include/Matrix.hpp
+ /home/monk/nn_c/include/utils/MatrixToVector.hpp
+ /home/monk/nn_c/src/utils/MatrixToVector.cpp
+CMakeFiles/nn_c.dir/src/utils/MultiplyMatrix.cpp.o
+ /home/monk/nn_c/include/Matrix.hpp
+ /home/monk/nn_c/include/utils/MultiplyMatrix.hpp
+ /home/monk/nn_c/src/utils/MultiplyMatrix.cpp

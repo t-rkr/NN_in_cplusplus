@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/monk/nn_c/include/Layer.hpp
-iostream
--
-Neuron.hpp
-/home/monk/nn_c/include/Neuron.hpp
-Matrix.hpp
-/home/monk/nn_c/include/Matrix.hpp
-
 /home/monk/nn_c/include/Matrix.hpp
 iostream
 -
@@ -22,11 +14,17 @@ vector
 random
 -
 
-/home/monk/nn_c/include/Neuron.hpp
+/home/monk/nn_c/include/utils/MultiplyMatrix.hpp
 iostream
 -
+vector
+-
+assert.h
+-
+../Matrix.hpp
+/home/monk/nn_c/include/Matrix.hpp
 
-/home/monk/nn_c/src/Layer.cpp
-../include/Layer.hpp
-/home/monk/nn_c/include/Layer.hpp
+/home/monk/nn_c/src/utils/MultiplyMatrix.cpp
+../../include/utils/MultiplyMatrix.hpp
+/home/monk/nn_c/include/utils/MultiplyMatrix.hpp
 

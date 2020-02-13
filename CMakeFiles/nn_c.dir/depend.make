@@ -13,6 +13,7 @@ CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: include/Layer.hpp
 CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: include/Matrix.hpp
 CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: include/NeuralNetwork.hpp
 CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: include/Neuron.hpp
+CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: include/utils/MultiplyMatrix.hpp
 CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o: src/NeuralNetwork.cpp
 
 CMakeFiles/nn_c.dir/src/Neuron.cpp.o: include/Neuron.hpp
@@ -22,5 +23,14 @@ CMakeFiles/nn_c.dir/src/main.cpp.o: include/Layer.hpp
 CMakeFiles/nn_c.dir/src/main.cpp.o: include/Matrix.hpp
 CMakeFiles/nn_c.dir/src/main.cpp.o: include/NeuralNetwork.hpp
 CMakeFiles/nn_c.dir/src/main.cpp.o: include/Neuron.hpp
+CMakeFiles/nn_c.dir/src/main.cpp.o: include/utils/MultiplyMatrix.hpp
 CMakeFiles/nn_c.dir/src/main.cpp.o: src/main.cpp
+
+CMakeFiles/nn_c.dir/src/utils/MatrixToVector.cpp.o: include/Matrix.hpp
+CMakeFiles/nn_c.dir/src/utils/MatrixToVector.cpp.o: include/utils/MatrixToVector.hpp
+CMakeFiles/nn_c.dir/src/utils/MatrixToVector.cpp.o: src/utils/MatrixToVector.cpp
+
+CMakeFiles/nn_c.dir/src/utils/MultiplyMatrix.cpp.o: include/Matrix.hpp
+CMakeFiles/nn_c.dir/src/utils/MultiplyMatrix.cpp.o: include/utils/MultiplyMatrix.hpp
+CMakeFiles/nn_c.dir/src/utils/MultiplyMatrix.cpp.o: src/utils/MultiplyMatrix.cpp
 

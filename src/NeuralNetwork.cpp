@@ -1,4 +1,22 @@
 #include "../include/NeuralNetwork.hpp"
+#include "../include/utils/MultiplyMatrix.hpp"
+
+void NeuralNetwork::feedForward(){
+  for(int i=0; i<(this->layers.size()-1);i++){
+        Matrix *a = this->getNeuronMatrix(i);
+
+        if(i!=0){
+          a = this->getActivatedNeuronMatrix(i);
+        }
+        Matrix *b = this->getWeightMatrix(i);
+        cout<<"here"<<endl;
+        Matrix *c = (new utils::MultiplyMatrix(a,b))->execute();
+
+        for(int c_index=0; c_index < c->getNumCols();c_index++){
+          this->setNeuronValue(i+1, c_index, c->getValue(0,c_index));
+        }
+    }
+}
 
 void NeuralNetwork::printToConsole(){
   for(int i=0;i< this->layers.size();i++){

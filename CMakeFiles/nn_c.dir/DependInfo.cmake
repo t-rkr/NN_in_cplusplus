@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/monk/nn_c/src/NeuralNetwork.cpp" "/home/monk/nn_c/CMakeFiles/nn_c.dir/src/NeuralNetwork.cpp.o"
   "/home/monk/nn_c/src/Neuron.cpp" "/home/monk/nn_c/CMakeFiles/nn_c.dir/src/Neuron.cpp.o"
   "/home/monk/nn_c/src/main.cpp" "/home/monk/nn_c/CMakeFiles/nn_c.dir/src/main.cpp.o"
+  "/home/monk/nn_c/src/utils/MatrixToVector.cpp" "/home/monk/nn_c/CMakeFiles/nn_c.dir/src/utils/MatrixToVector.cpp.o"
+  "/home/monk/nn_c/src/utils/MultiplyMatrix.cpp" "/home/monk/nn_c/CMakeFiles/nn_c.dir/src/utils/MultiplyMatrix.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
