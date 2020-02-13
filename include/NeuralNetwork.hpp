@@ -11,6 +11,8 @@ class NeuralNetwork{
     NeuralNetwork(vector<int> topology);
     void setCurrentInput(vector<double> input);
     void printToConsole();
+    void feedForward();
+
   private:
     vector<int> topology;
     int topologySize;
