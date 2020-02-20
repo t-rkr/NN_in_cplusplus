@@ -32,14 +32,19 @@ int main(){
   vector<double> target;
   target.push_back(0.0);
 
+
   NeuralNetwork *nn = new NeuralNetwork(topology);
   nn->setCurrentInput(input);
   nn->setCurrentTarget(target);
-  nn->feedForward();
-  nn->printToConsole();
-  nn->setErrors();
   
-  cout<<"Total Error: "<<nn->getTotalError()<<endl;
+  //training process
+  for(int x=0; x < 5000; x++){
+    cout<<"Epoch: "<<x+1<<endl;
+    nn->feedForward();
+    nn->setErrors(); 
+    cout<<"Total Error: "<<nn->getTotalError()<<endl;
+    nn->backPropogation();
+  }
 
   return 0;
 }

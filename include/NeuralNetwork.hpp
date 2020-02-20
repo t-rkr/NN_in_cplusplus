@@ -2,6 +2,9 @@
 #define _NEURALNETWORK_HPP_
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
 using namespace std;

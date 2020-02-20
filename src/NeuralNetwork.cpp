@@ -2,6 +2,10 @@
 #include "../include/utils/MultiplyMatrix.hpp"
 
 void NeuralNetwork::backPropogation(){
+
+
+  vector<Matrix *> newWeights;
+  Matrix *gradient;
   //output to hidden layer
   int outputLayerIndex = this->layers.size()-1;
   Matrix *derivedValuesYToZ = this->layers.at(outputLayerIndex)->matrixifyDerivedVals();
@@ -20,15 +24,73 @@ void NeuralNetwork::backPropogation(){
   Matrix *weightsOutputHidden = this->weightMatrices.at(outputLayerIndex -1);
   Matrix *deltaOutputHidden = (new utils::MultiplyMatrix(
                               gradientsYToZ->transpose(),
-                              lastHiddenLayer->matrixifyActivatedVals()))->execute();
+                              lastHiddenLayer->matrixifyActivatedVals()))->execute()->transpose();
+  Matrix *newWeightsOutputToHidden = new Matrix(deltaOutputHidden->getNumRows(),deltaOutputHidden->getNumCols(),false);
 
-  for(int i=(outputLayerIndex -1);i>=0;i--){
-    
+  for(int r = 0; r < deltaOutputHidden->getNumRows();r++){
+    for(int c=0; c < deltaOutputHidden->getNumCols();c++){
+      double originalWeight = weightsOutputHidden->getValue(r, c);
+      double deltaWeight = deltaOutputHidden->getValue(r, c);
+      newWeightsOutputToHidden->setValue(r, c, (originalWeight - deltaWeight));
+    }
   }
+  newWeights.push_back(newWeightsOutputToHidden);
+  gradient = new Matrix(gradientsYToZ->getNumRows(), gradientsYToZ->getNumCols(),false);
+  //cout<<"Output to Hidden New Weights"<<endl;
+  //newWeightsOutputToHidden->printToConsole();
+  
+  for(int r = 0; r < gradientsYToZ->getNumRows(); r++){    
+    for(int c = 0; c < gradientsYToZ->getNumCols(); c++){
+      gradient->setValue(r, c, gradientsYToZ->getValue(r,c));
+    }
+  }
+  //Moving from last hidden layer down to input layer
+  for(int i=(outputLayerIndex -1);i>0;i--){
+    Layer *l = this->layers.at(i);
+    Matrix *activatedHidden = l->matrixifyDerivedVals();
+    Matrix *derivedHidden = l->matrixifyDerivedVals();
+    Matrix *derivedGradients = new Matrix(1, l->getNeurons().size(),false );
+   
+    Matrix *weightMatrix = this->weightMatrices.at(i);
+    Matrix *orignalWeight = this->weightMatrices.at(i-1);
 
+    for(int r = 0; r < weightMatrix->getNumRows(); r++){
+      double sum=0;
+      for (int c = 0; c < weightMatrix->getNumCols();c++){
+           double p = gradient->getValue(0, c) * weightMatrix->getValue(r,c);
+           sum += p;
+        }
+      double g = sum*activatedHidden->getValue(0, r);
+      derivedGradients->setValue(0, r, g);
+      }
+    Matrix *leftNeurons = (i-1)==0 ? this->layers.at(0)->matrixifyVals() : this->layers.at(i-1)->matrixifyActivatedVals();
+
+    Matrix *deltaWeights = (new utils::MultiplyMatrix(derivedGradients->transpose(), leftNeurons))->execute()->transpose();
+
+    Matrix *newWeightsHidden = new Matrix(deltaWeights->getNumRows(), deltaWeights->getNumCols(), false);
+    
+    for(int r =0 ; r < newWeightsHidden->getNumRows();r++){
+      for (int c=0; c < newWeightsHidden->getNumCols();c++){
+        double w = orignalWeight->getValue(r, c);
+        double d = deltaWeights->getValue(r,c);
+        double n = w - d;
+        newWeightsHidden->setValue(r, c, n);
+      }
+    }
+    gradient = new Matrix(derivedGradients->getNumRows(), derivedGradients->getNumCols(), false);
+    for(int r = 0; r < derivedGradients->getNumRows(); r++){    
+      for(int c = 0; c < derivedGradients->getNumCols(); c++){
+        gradient->setValue(r, c, derivedGradients->getValue(r,c));
+    }
+  }
+    newWeights.push_back(newWeightsHidden);
+  }
+  reverse(newWeights.begin(), newWeights.end());
+  this->weightMatrices = newWeights;
 }
 
 void NeuralNetwork::setErrors(){
+  errors.clear();
   if(this->target.size() == 0){
     cerr << "No target for this neural network"<<endl;
     assert(false);
@@ -41,7 +103,6 @@ void NeuralNetwork::setErrors(){
 
   this->error = 0.00;
   int outputLayerIndex = this->layers.size() -1;
-  cout<<"Output Layer Index"<<outputLayerIndex<<endl;
   vector<Neuron *> outputNeurons = this->layers.at(outputLayerIndex)->getNeurons();
   for(int i=0; i<target.size();i++)
   {
