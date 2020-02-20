@@ -1,6 +1,57 @@
 #include "../include/NeuralNetwork.hpp"
 #include "../include/utils/MultiplyMatrix.hpp"
 
+void NeuralNetwork::backPropogation(){
+  //output to hidden layer
+  int outputLayerIndex = this->layers.size()-1;
+  Matrix *derivedValuesYToZ = this->layers.at(outputLayerIndex)->matrixifyDerivedVals();
+  Matrix *gradientsYToZ = new Matrix(1,this->layers.at(outputLayerIndex)->getNeurons().size(),false);
+
+  for(int i=0;i < this->errors.size();i++)
+  {
+    double d = derivedValuesYToZ->getValue(0,i);
+    double e = this->errors.at(i);
+    double g = d*e;
+    gradientsYToZ->setValue(0,i,g);
+  }
+  
+  int lastHiddenLayerIndex = outputLayerIndex -1;
+  Layer *lastHiddenLayer = this->layers.at(lastHiddenLayerIndex);
+  Matrix *weightsOutputHidden = this->weightMatrices.at(outputLayerIndex -1);
+  Matrix *deltaOutputHidden = (new utils::MultiplyMatrix(
+                              gradientsYToZ->transpose(),
+                              lastHiddenLayer->matrixifyActivatedVals()))->execute();
+
+  for(int i=(outputLayerIndex -1);i>=0;i--){
+    
+  }
+
+}
+
+void NeuralNetwork::setErrors(){
+  if(this->target.size() == 0){
+    cerr << "No target for this neural network"<<endl;
+    assert(false);
+  }
+
+  if(this->target.size() != this->layers.at(this->layers.size() -1)->getNeurons().size()){
+    cerr<<"Target size is not the same as output layer size: "<<this->layers.at(this->layers.size() -1)->getNeurons().size()<<endl;
+    assert(false);
+  }
+
+  this->error = 0.00;
+  int outputLayerIndex = this->layers.size() -1;
+  cout<<"Output Layer Index"<<outputLayerIndex<<endl;
+  vector<Neuron *> outputNeurons = this->layers.at(outputLayerIndex)->getNeurons();
+  for(int i=0; i<target.size();i++)
+  {
+    double tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+    errors.push_back(tempErr);
+    this->error +=tempErr;
+  }
+  historicalErrors.push_back(this->error);
+}
+
 void NeuralNetwork::feedForward(){
   for(int i=0; i<(this->layers.size()-1);i++){
         Matrix *a = this->getNeuronMatrix(i);
@@ -9,7 +60,6 @@ void NeuralNetwork::feedForward(){
           a = this->getActivatedNeuronMatrix(i);
         }
         Matrix *b = this->getWeightMatrix(i);
-        cout<<"here"<<endl;
         Matrix *c = (new utils::MultiplyMatrix(a,b))->execute();
 
         for(int c_index=0; c_index < c->getNumCols();c_index++){

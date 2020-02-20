@@ -16,8 +16,12 @@ int main(){
   //mT->printToConsole();
   
   vector<int> topology;
+  //Input Layer
   topology.push_back(3);
+  //Hidden Layer
   topology.push_back(2);
+  topology.push_back(2);
+  //Output Layer
   topology.push_back(1);
 
   vector<double> input;
@@ -25,10 +29,17 @@ int main(){
   input.push_back(0.0);
   input.push_back(1.0);
 
+  vector<double> target;
+  target.push_back(0.0);
 
   NeuralNetwork *nn = new NeuralNetwork(topology);
   nn->setCurrentInput(input);
+  nn->setCurrentTarget(target);
   nn->feedForward();
   nn->printToConsole();
+  nn->setErrors();
+  
+  cout<<"Total Error: "<<nn->getTotalError()<<endl;
+
   return 0;
 }
