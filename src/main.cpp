@@ -44,6 +44,15 @@ int main(){
     nn->setErrors(); 
     cout<<"Total Error: "<<nn->getTotalError()<<endl;
     nn->backPropogation();
+
+    cout<<"=========================="<<endl;
+    cout<<"OUTPUT: ";
+    nn->printOutputToConsole();
+
+    cout<<"Target: ";
+    nn->printTargetToConsole();
+    cout<<"=========================="<<endl;
+    cout<<endl;
   }
 
   return 0;
